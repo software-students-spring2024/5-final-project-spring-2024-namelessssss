@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  front-end:
+    build: ./web-app
+    ports:
+      - 5050:5050
+    depends_on:
+      - back-end
+  
+  back-end:
+    build: ./weather-data-collect
+    ports:
+      - 5051:5051
+
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
