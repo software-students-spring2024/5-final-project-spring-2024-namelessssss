@@ -1,16 +1,13 @@
 import os
 from flask import Flask, render_template, request
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 app = Flask(__name__)
 
-MONGODB_URI = os.environ['MONGODB_URI']
-DB_NAME = 'Project5'
-COLLECTION_NAME = 'WeatherData'
-
-client = MongoClient(MONGODB_URI)
-db = client[DB_NAME]
-collection = db[COLLECTION_NAME]
+client = MongoClient(os.environ['MONGODB_URI'], tls=True, tlsCertificateKeyFile=os.environ['SSL_CERT_FILE'], server_api=ServerApi("1"))
+db = client[os.environ['DB_NAME']]
+collection = db[os.environ['DB_COLLECTION_NAME']]
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -26,4 +23,4 @@ def index():
         return render_template('index.html', cities=cities)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050, debug=True)

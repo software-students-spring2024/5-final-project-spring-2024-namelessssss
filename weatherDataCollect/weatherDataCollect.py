@@ -1,31 +1,23 @@
 import os
 import requests
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 API_KEY = os.environ['OPENWEATHERMAP_API_KEY']
-BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall'
-
-MONGODB_URI = os.environ['MONGODB_URI']
-DB_NAME = 'Project5'
-COLLECTION_NAME = 'WeatherData'
+BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall?'
 
 def fetch_weather_data(lat, lon):
-    params = {
-        'lat': lat,
-        'lon': lon,
-        'appid': API_KEY,
-        'units': 'metric'
-    }
-    response = requests.get(BASE_URL, params=params)
+    url = BASE_URL + 'lat=' + str(lat) + '&lon=' + str(lon) + '&appid=' + API_KEY
+    response = requests.get(url)
     if response.status_code == 200:
         return response.json()
     else:
         return None
 
 def store_weather_data(weather_data):
-    client = MongoClient(MONGODB_URI)
-    db = client[DB_NAME]
-    collection = db[COLLECTION_NAME]
+    client = MongoClient(os.environ['MONGODB_URI'], tls=True, tlsCertificateKeyFile=os.environ['SSL_CERT_FILE'], server_api=ServerApi("1"))
+    db = client[os.environ['DB_NAME']]
+    collection = db[os.environ['DB_COLLECTION_NAME']]
     collection.insert_one(weather_data)
     client.close()
 

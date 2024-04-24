@@ -5,6 +5,9 @@
 .vscode/
 .vscode/settings.json
 
+# pycharm junk
+.idea
+
 # emacs backups
 *~
 
