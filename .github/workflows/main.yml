@@ -1,0 +1,52 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Test Weather Data Collection
+        run: |
+          cd weatherDataCollect
+          docker build -t weatherDataCollect .
+          docker run --rm weatherDataCollect python -m unittest discover tests
+
+      - name: Build and Test Web Application
+        run: |
+          cd webApp
+          docker build -t webApp .
+          docker run --rm webApp python -m unittest discover tests
+
+  push-to-docker-hub:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Push Weather Data Collection to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push weatherDataCollect:latest
+
+      - name: Push Web Application to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push webApp:latest
+
+  deploy:
+    needs: push-to-docker-hub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy to Digital Ocean
+        run: |
+          # Add deployment steps for Digital Ocean

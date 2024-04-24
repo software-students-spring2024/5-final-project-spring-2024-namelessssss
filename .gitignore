@@ -5,6 +5,9 @@
 .vscode/
 .vscode/settings.json
 
+# pycharm junk
+.idea
+
 # emacs backups
 *~
 
@@ -147,3 +150,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Ignore docker-compose.yml file
+docker-compose.yml
