@@ -1,27 +1,25 @@
-name: CI/CD Pipeline
+name: Web App CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
       - uses: actions/checkout@v2
-
-      - name: Build and Test Weather Data Collection
-        run: |
-          cd weatherDataCollect
-          docker build -t weatherDataCollect .
-          docker run --rm weatherDataCollect python -m unittest discover tests
 
       - name: Build and Test Web Application
         run: |
-          cd webApp
-          docker build -t webApp .
-          docker run --rm webApp python -m unittest discover tests
+          cd web-app
+          docker build -t web-app .
+          docker run --rm web-app python -m unittest discover tests
+          
 
   push-to-docker-hub:
     needs: build-and-test
@@ -29,11 +27,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Push Weather Data Collection to Docker Hub
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push weatherDataCollect:latest
 
       - name: Push Web Application to Docker Hub
         run: |

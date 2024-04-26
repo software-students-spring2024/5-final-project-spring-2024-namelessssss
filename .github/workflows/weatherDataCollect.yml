@@ -1,0 +1,44 @@
+name: Fetch Weather CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+      - uses: actions/checkout@v2
+
+      - name: Build and Test Weather Data Collection
+        run: |
+          cd weather-data-collect
+          docker build -t weather-data-collect .
+          docker run --rm weather-data-collect python -m unittest discover tests
+
+  push-to-docker-hub:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Push Weather Data Collection to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push weatherDataCollect:latest
+
+  deploy:
+    needs: push-to-docker-hub
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy to Digital Ocean
+        run: |
+          # Add deployment steps for Digital Ocean

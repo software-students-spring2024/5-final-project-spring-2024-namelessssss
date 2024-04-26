@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 
 API_KEY = os.environ['OPENWEATHERMAP_API_KEY']
-BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall?'
+BASE_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 def fetch_weather_data(lat, lon):
     url = BASE_URL + 'lat=' + str(lat) + '&lon=' + str(lon) + '&appid=' + API_KEY
@@ -31,6 +31,7 @@ if __name__ == '__main__':
 
     for city in cities:
         weather_data = fetch_weather_data(city['lat'], city['lon'])
+        print(weather_data)
         if weather_data:
             weather_data['city'] = city['name']
             store_weather_data(weather_data)
