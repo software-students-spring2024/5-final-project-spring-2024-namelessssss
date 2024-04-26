@@ -17,10 +17,10 @@
     </form>
     {% if weather_data %}
         <h2>Current Weather for {{ weather_data.city }}</h2>
-        <p>Temperature: {{ weather_data.current.temp }}°C</p>
-        <p>Humidity: {{ weather_data.current.humidity }}%</p>
-        <p>Wind Speed: {{ weather_data.current.wind_speed }} m/s</p>
-        <p>Weather Conditions: {{ weather_data.current.weather[0].description }}</p>
+        <p>Temperature: {{ weather_data.main.temp }}°C</p>
+        <p>Humidity: {{ weather_data.main.humidity }}%</p>
+        <p>Wind Speed: {{ weather_data.main.wind_speed }} m/s</p>
+        <p>Weather Conditions: {{ weather_data.weather[0].description }}</p>
     {% endif %}
     {% if error %}
         <p>{{ error }}</p>
