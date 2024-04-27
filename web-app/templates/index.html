@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather Forecasting System</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Real-Time Weather Forecasting System</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
-    <h1>Weather Forecasting System</h1>
-    <form method="POST">
-        <label for="city">Select City:</label>
-        <select name="city" id="city">
-            {% for city in cities %}
-                <option value="{{ city }}">{{ city }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Get Weather">
-    </form>
-    {% if weather_data %}
-        <h2>Current Weather for {{ weather_data.city }}</h2>
-        <p>Temperature: {{ weather_data.main.temp }}°C</p>
-        <p>Humidity: {{ weather_data.main.humidity }}%</p>
-        <p>Wind Speed: {{ weather_data.main.wind_speed }} m/s</p>
-        <p>Weather Conditions: {{ weather_data.weather[0].description }}</p>
-    {% endif %}
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+    <div class="container">
+        <h1>Real-Time Weather Forecasting System</h1>
+        <input type="text" id="location-input" placeholder="Enter location">
+        <button id="get-weather-btn">Get Weather</button>
+        <div class="weather-box" id="weather-box" style="display: none;">
+            <h2>Weather for <span id="location"></span></h2>
+            <p><strong>Temperature:</strong> <span id="temperature"></span>°C</p>
+            <p><strong>Humidity:</strong> <span id="humidity"></span>%</p>
+            <p><strong>Wind Speed:</strong> <span id="wind-speed"></span>km/h</p>
+            <p><strong>Conditions:</strong> <span id="conditions"></span></p>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
 </body>
 </html>
+
