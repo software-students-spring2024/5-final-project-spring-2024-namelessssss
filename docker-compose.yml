@@ -1,23 +1,24 @@
 version: '3'
 
 services:
-  front-end:
+  web-app:
     build: ./web-app
     ports:
       - 5050:5050
+    environment:
+      - MONGODB_URI=mongodb+srv://nameless.wun5lpq.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=Nameless
+      - DB_NAME=Project5
+      - DB_COLLECTION_NAME=WeatherData
+      - SSL_CERT_FILE=/web-app/X509-cert-4588623656805667932.pem
     depends_on:
-      - back-end
-  
-  back-end:
+      - weather-data-collect
+
+  weather-data-collect:
     build: ./weather-data-collect
-    ports:
-      - 5051:5051
-
-  mongodb:
-    image: mongo
-    restart: always
-    volumes:
-      - mongodb_data:/data/db
-
-volumes:
-  mongodb_data:
+    environment:
+      - MONGODB_URI=mongodb+srv://nameless.wun5lpq.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=Nameless
+      - DB_NAME=Project5
+      - DB_COLLECTION_NAME=WeatherData
+      - SSL_CERT_FILE=/weather-data-collect/X509-cert-4588623656805667932.pem
+    expose:
+      - 5030

@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
@@ -11,26 +12,24 @@ collection = db[os.environ['DB_COLLECTION_NAME']]
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        city = request.form['city']
-        weather_data = collection.find_one({'city': city})
-        if weather_data:
-            return render_template('index.html', weather_data=weather_data)
-        else:
-            return render_template('index.html', error='Weather data not found for the selected city.')
-    else:
-        cities = collection.distinct('city')
-        # Pass an empty dictionary as weather_data if it's a GET request
-        return render_template('index.html', cities=cities, weather_data={})
+    cities = ['New York', 'Boston', 'Washington, D.C.', 'Miami']
+    temp_units = ['Kelvin', 'Celsius', 'Fahrenheit']
+    selected_city = request.form.get('city', cities[0])
+    selected_unit = request.form.get('temp_unit', temp_units[0])
 
-@app.route('/weather')
-def weather():
-    location = request.args.get('location')
-    weather_data = collection.find_one({'city': location})
-    if weather_data:
-        return jsonify(weather_data)
+    if request.method == 'POST':
+        city = selected_city
+        temp_unit = selected_unit
+
+        response = requests.post('http://weather-data-collect:5030/collect', json={'city': city})
+
+        weather_data = collection.find_one({'city': city}, sort=[('_id', -1)])
+        if weather_data:
+            return render_template('index.html', cities=cities, temp_units=temp_units, weather_data=weather_data, selected_unit=temp_unit, selected_city=selected_city)
+        else:
+            return render_template('index.html', cities=cities, temp_units=temp_units, error='Weather data not found for the selected city.', selected_unit=selected_unit, selected_city=selected_city)
     else:
-        return jsonify(error='Weather data not found for the selected location.'), 404
+        return render_template('index.html', cities=cities, temp_units=temp_units, selected_unit=selected_unit, selected_city=selected_city)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)

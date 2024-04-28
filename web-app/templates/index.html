@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Real-Time Weather Forecasting System</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <title>Weather App</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Real-Time Weather Forecasting System</h1>
-        <input type="text" id="location-input" placeholder="Enter location">
-        <button id="get-weather-btn">Get Weather</button>
-        <div class="weather-box" id="weather-box" style="display: none;">
-            <h2>Weather for <span id="location"></span></h2>
-            <p><strong>Temperature:</strong> <span id="temperature"></span>°C</p>
-            <p><strong>Humidity:</strong> <span id="humidity"></span>%</p>
-            <p><strong>Wind Speed:</strong> <span id="wind-speed"></span>km/h</p>
-            <p><strong>Conditions:</strong> <span id="conditions"></span></p>
-        </div>
-    </div>
-    <script src="/static/app.js"></script>
+    <h1>Weather App</h1>
+    <form method="POST">
+        <label for="city">Select a city:</label>
+        <select name="city" id="city">
+            {% for city in cities %}
+            <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="temp_unit">Select temperature unit:</label>
+        <select name="temp_unit" id="temp_unit">
+            {% for unit in temp_units %}
+            <option value="{{ unit }}" {% if unit == selected_unit %}selected{% endif %}>{{ unit }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Check Weather</button>
+    </form>
+    {% if weather_data %}
+    <h2>Weather Data for {{ weather_data.city }}</h2>
+    <p>Temperature: 
+        {% if selected_unit == 'Kelvin' %}
+            {{ weather_data.main.temp_kelvin }} K
+        {% elif selected_unit == 'Celsius' %}
+            {{ weather_data.main.temp_celsius }} °C
+        {% else %}
+            {{ weather_data.main.temp_fahrenheit }} °F
+        {% endif %}
+    </p>
+    <p>Humidity: {{ weather_data.main.humidity }}%</p>
+    <p>Wind Speed: {{ weather_data.wind.speed }} m/s</p>
+    <p>Conditions: {{ weather_data.weather[0].description }}</p>
+    {% elif error %}
+    <p>{{ error }}</p>
+    {% endif %}
 </body>
 </html>
-
