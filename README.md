@@ -1,9 +1,11 @@
 [![Weater Data CI](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml/badge.svg?branch=main)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml)
 [![Web App CI](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml/badge.svg)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml)
 
-# Nameless Weather Forecast
+# Nameless Weather App
 
-The Nameless Weather Forecast is a web-based weather forecasting system that...
+The Nameless Weather App is a web-based weather forecasting web-based application that utilizes OpenWeatherMap's API in order to collect real-time weather data.
+Users may use the web application's user-friendly interface to select which major city they would like to retrieve weather information about and to select their preferred temperature unit.
+The app then displays real-time information about the weather in that city, including its temperature, humidity, wind speed, and overall weather condition.
 
 delete below:
 
