@@ -1,8 +1,9 @@
-**instert badges showing the result of the latest CI/CD of each subsystem**
+[![Weater Data CI](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml/badge.svg?branch=main)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml)
+[![.github/workflows/webApp.yml](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml/badge.svg)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml)
 
-# The Nameless Weather Forecasting System
+# Nameless Weather Forecast
 
-Plain language description!!!
+The Nameless Weather Forecast is a web-based weather forecasting system that...
 
 **delete below**
 An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
