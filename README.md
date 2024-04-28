@@ -18,13 +18,11 @@ The Nameless Weather App is made up of **two major subsystems**:
 
 # Instructions
 
-wait that might not be necessary... hold on.
-
 ## API Key Setup
 1. Obtain an OpenWeatherMap API key by following these steps:
     - Log into your OpenWeatherMap API account and navigate to the [API keys](https://home.openweathermap.org/api_keys) page.
     -  Copy the generated API key
-> *Note: the free tier is sufficient for this application*
+> *Note: the free tier of the subscription is sufficient for this application*
 
 2. Insert the API key into the `Dockerfile` in the `weather-data-collect` directory.
     - Replace `API_KEY_HERE` with your OpenWeatherMap API key.
@@ -43,14 +41,10 @@ wait that might not be necessary... hold on.
 4. The application will display the real-time weather data for the selected city, including it's current temperature, humidity level, wind speed, and overall weather condition.
 5. To get information about another city or update the information you already have to represent the current time, repeat steps 2-3 as needed.
 
+## Testing
+AHHHHHHHHH
 
-**instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!**
-
-**instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.**
-
-
-
-## Contributors
+# Contributors
 
 - [Hannah Horiuchi](https://github.com/hah8236)
 - [Jiahua Liao](https://github.com/Jiahuita)
