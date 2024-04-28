@@ -16,9 +16,9 @@ The Nameless Weather App is made up of **two major subsystems**:
 2. **Web Application Subsystem:** This subsystem is a web application that displays the real-time weather data fetched by the first subsystem. Users can select their location to receive the current weather information.
 > **insert link to container image for this custom subsystem hosted on dockerhub**
 
-# Instructions
+## Instructions
 
-## API Key Setup
+### API Key Setup
 1. Obtain an OpenWeatherMap API key by following these steps:
     - Log into your OpenWeatherMap API account and navigate to the [API keys](https://home.openweathermap.org/api_keys) page.
     -  Copy the generated API key
@@ -28,12 +28,12 @@ The Nameless Weather App is made up of **two major subsystems**:
     - Replace `API_KEY_HERE` with your OpenWeatherMap API key.
     - Save the changes.
 
-## Running the Application with Docker
+### Running the Application with Docker
 
 1. Open a terminal and navigate to the root folder of the project.
 2. Run the command `docker-compose up --build` to build and start the application containers.
 
-### Accessing the Web Application
+#### Accessing the Web Application
 
 1. Open a web browser and visit *what is the local host again lol* to access the Nameless Weather App web application.
 2. From the first dropdown, select which major city you would like to retrieve weather data from. Then from the second, select which unit of temperature you would like to recieve the data in.
@@ -44,7 +44,7 @@ The Nameless Weather App is made up of **two major subsystems**:
 ## Testing
 AHHHHHHHHH
 
-# Contributors
+## Contributors
 
 - [Hannah Horiuchi](https://github.com/hah8236)
 - [Jiahua Liao](https://github.com/Jiahuita)
