@@ -9,7 +9,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV OPENWEATHERMAP_API_KEY=a8fb5351db81858ed5e57093a90b5a5d
+ENV OPENWEATHERMAP_API_KEY=API_KEY_HERE
 ENV MONGODB_URI=mongodb+srv://nameless.wun5lpq.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=Nameless
 ENV DB_NAME=Project5
 ENV DB_COLLECTION_NAME=WeatherData
