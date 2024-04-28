@@ -1,11 +1,12 @@
 [![Weater Data CI](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml/badge.svg?branch=main)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/weatherDataCollect.yml)
-[![.github/workflows/webApp.yml](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml/badge.svg)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml)
+[![Web App CI](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml/badge.svg)](https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss/actions/workflows/webApp.yml)
 
 # Nameless Weather Forecast
 
 The Nameless Weather Forecast is a web-based weather forecasting system that...
 
-**delete below**
+delete below:
+
 An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
 
 # Instructions
@@ -15,7 +16,7 @@ work in progress...
 
 **instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.**
 
-in the weather-data-collect dockerfile, eplace the "OPENAI API KEY HERE" with your API key. 
+in the weather-data-collect dockerfile, eplace the "API KEY HERE" with your Open Weather Map API key. 
 You can make 
 
 
