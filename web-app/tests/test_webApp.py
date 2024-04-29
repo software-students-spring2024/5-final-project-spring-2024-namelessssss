@@ -1,9 +1,12 @@
-import coverage
 import unittest
 from unittest.mock import patch
 from flask import Flask
 from pymongo import MongoClient
 from app import app, db, collection
+# to test coverage, run these
+# cd web-app
+# docker build -t web-app .
+# docker run --rm web-app sh -c "coverage run -m unittest discover tests && coverage report"
 
 class TestWebApplication(unittest.TestCase):
     def setUp(self):
