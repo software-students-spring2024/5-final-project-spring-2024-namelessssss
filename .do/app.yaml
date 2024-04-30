@@ -1,9 +1,8 @@
 name: weather-checking-app
 services:
-  - name: web
+  - name: web-app
     github:
       branch: main
-      repo_clone_url: https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss.git
       deploy_on_push: true
     dockerfile_path: web-app/Dockerfile
     source_dir: web-app
@@ -12,10 +11,9 @@ services:
     routes:
       - path: /
 
-  - name: weather-data
+  - name: weather-data-collect
     github:
       branch: main
-      repo_clone_url: https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss.git
       deploy_on_push: true
     dockerfile_path: weather-data-collect/Dockerfile
     source_dir: weather-data-collect
