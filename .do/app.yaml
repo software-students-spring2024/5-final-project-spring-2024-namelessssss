@@ -6,7 +6,7 @@ services:
       repository: jiahualiao/web-app
       tag: latest
     instance_count: 1
-    instance_size_slug: basic-xxs
+    instance_size_slug: basic-s
     routes:
       - path: /
 
@@ -16,4 +16,4 @@ services:
       repository: jiahualiao/weather-data-collect
       tag: latest
     instance_count: 1
-    instance_size_slug: basic-xxs
+    instance_size_slug: basic-s
