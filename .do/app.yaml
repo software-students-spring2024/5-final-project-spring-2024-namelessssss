@@ -1,0 +1,21 @@
+name: weather-checking-app
+services:
+  - name: web
+    image:
+      registry_type: DOCR
+      registry: registry.digitalocean.com/cs-474-project-5
+      repository: web-app
+      tag: latest
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
+
+  - name: weather-data-collect
+    image:
+      registry_type: DOCR
+      registry: registry.digitalocean.com/cs-474-project-5
+      repository: weather-data-collect
+      tag: latest
+    instance_count: 1
+    instance_size_slug: basic-xxs

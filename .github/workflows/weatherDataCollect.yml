@@ -45,5 +45,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy to Digital Ocean
+        uses: digitalocean/action-doctl@v2.1.0
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         run: |
-          # Add deployment steps for Digital Ocean
+          doctl apps create --spec .do/app.yaml
