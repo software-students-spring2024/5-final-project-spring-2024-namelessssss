@@ -12,7 +12,7 @@ services:
     routes:
       - path: /
 
-   - name: weather-data-collect
+  - name: weather-data-collect
     github:
       repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
       branch: main
