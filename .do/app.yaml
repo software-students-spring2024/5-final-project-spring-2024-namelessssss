@@ -2,6 +2,7 @@ name: weather-checking-app
 services:
   - name: web-app
     github:
+      repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
       branch: main
       deploy_on_push: true
     dockerfile_path: web-app/Dockerfile
@@ -13,6 +14,7 @@ services:
 
   - name: weather-data-collect
     github:
+      repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
       branch: main
       deploy_on_push: true
     dockerfile_path: weather-data-collect/Dockerfile
