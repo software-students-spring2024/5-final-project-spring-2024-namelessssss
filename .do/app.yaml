@@ -1,4 +1,4 @@
-name: weather-checking-app
+name: 5-final-project-spring-2024-namelessssss
 services:
   - name: web-app
     github:
