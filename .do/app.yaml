@@ -11,3 +11,13 @@ services:
     instance_size_slug: basic-xxs
     routes:
       - path: /
+
+   - name: weather-data-collect
+    github:
+      repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
+      branch: main
+      deploy_on_push: true
+    dockerfile_path: weather-data-collect/Dockerfile
+    source_dir: weather-data-collect
+    instance_count: 1
+    instance_size_slug: basic-xxs
