@@ -48,5 +48,6 @@ jobs:
         uses: digitalocean/action-doctl@v2.1.0
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-        run: |
-          doctl apps create --spec .do/app.yaml
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        run: doctl apps create --spec .do/app.yaml
