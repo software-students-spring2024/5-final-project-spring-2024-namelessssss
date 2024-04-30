@@ -3,7 +3,7 @@ services:
   - name: web-app
     image:
       registry_type: DOCKER_HUB
-      repository: jiahualiao/web-app
+      repository: main/web-app
       tag: latest
     instance_count: 1
     instance_size_slug: basic-s
@@ -13,7 +13,7 @@ services:
   - name: weather-data-collect
     image:
       registry_type: DOCKER_HUB
-      repository: jiahualiao/weather-data-collect
+      repository: main/weather-data-collect
       tag: latest
     instance_count: 1
     instance_size_slug: basic-s
