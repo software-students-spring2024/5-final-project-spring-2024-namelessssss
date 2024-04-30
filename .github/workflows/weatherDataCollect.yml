@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Build and Test Weather Data Collection
         run: |
           cd weather-data-collect
@@ -22,7 +23,9 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
       - name: Check if secrets are empty
         run: |
           if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
@@ -30,8 +33,10 @@ jobs:
           else
             echo "Secrets are not empty."
           fi
+
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Push Weather Data Collection to Docker Hub
         run: |
           cd weather-data-collect
@@ -43,17 +48,11 @@ jobs:
     needs: push-to-docker-hub
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: DigitalOcean App Platform Deployment
+        uses: digitalocean/app_action@v1.1.5
         with:
+          app_name: weather-data-collect
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Log in to DigitalOcean Container Registry
-        run: doctl registry login --expiry-seconds 600
-      - name: Build and Push Fetch Weather Image
-        run: |
-          cd weather-data-collect
-          docker build -t registry.digitalocean.com/cs-474-project-5/weather-data-collect:latest .
-          docker push registry.digitalocean.com/cs-474-project-5/weather-data-collect:latest
-      - name: Deploy to App Platform
-        run: doctl apps create --spec .do/app.yaml
