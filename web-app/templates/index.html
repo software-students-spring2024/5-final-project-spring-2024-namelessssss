@@ -34,7 +34,11 @@
         {% endif %}
     </p>
     <p>Humidity: {{ weather_data.main.humidity }}%</p>
-    <p>Wind Speed: {{ weather_data.wind.speed }} m/s</p>
+    {% if 'wind' in weather_data %}
+        <p>Wind Speed: {{ weather_data.wind.speed }} m/s</p>
+    {% else %}
+        <p>Wind Speed: N/A</p>
+    {% endif %}
     <p>Conditions: {{ weather_data.weather[0].description }}</p>
     {% elif error %}
     <p>{{ error }}</p>

@@ -2,44 +2,40 @@ name: Web App CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-
       - name: Build and Test Web Application
         run: |
           cd web-app
           docker build -t web-app .
           docker run --rm web-app python -m unittest discover tests
-          
 
   push-to-docker-hub:
     needs: build-and-test
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Push Web Application to Docker Hub
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push webApp:latest
+          docker build -t web-app .
+          docker tag web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/web-app:latest
 
   deploy:
     needs: push-to-docker-hub
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Deploy to Digital Ocean
         run: |
           # Add deployment steps for Digital Ocean
