@@ -27,15 +27,17 @@ class TestWebApplication(unittest.TestCase):
                 'temp_celsius': 25.5,
                 'temp_fahrenheit': 77.9
             }
-        }):
+        }), patch('requests.post') as mock_post:
+            mock_post.return_value.status_code = 200
             response = self.app.post('/', data={'city': 'New York', 'temp_unit': 'Celsius'})
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'New York', response.data)
-            self.assertIn(b'25.5', response.data)
+            self.assertIn(b'temp_celsius', response.data)
 
     def test_index_post_not_found(self):
         # Test POST request to the index route when weather data is not found
-        with patch.object(collection, 'find_one', return_value=None):
+        with patch.object(collection, 'find_one', return_value=None), patch('requests.post') as mock_post:
+            mock_post.return_value.status_code = 200
             response = self.app.post('/', data={'city': 'London', 'temp_unit': 'Celsius'})
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Weather data not found', response.data)

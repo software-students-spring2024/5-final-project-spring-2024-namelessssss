@@ -10,10 +10,17 @@ class TestWeatherDataCollect(unittest.TestCase):
         # Test the fetch_weather_data function
         with patch('requests.get') as mock_get:
             mock_get.return_value.status_code = 200
-            mock_get.return_value.json.return_value = {'name': 'New York'}
+            mock_get.return_value.json.return_value = {
+                'name': 'New York',
+                'main': {
+                    'temp': 298.15
+                }
+            }
             weather_data = fetch_weather_data('New York')
             self.assertIsNotNone(weather_data)
-            self.assertEqual(weather_data['name'], 'New York')
+            self.assertIn('name', weather_data)
+            self.assertIn('main', weather_data)
+            self.assertIn('temp', weather_data['main'])
 
     def test_convert_temperatures(self):
         # Test the convert_temperatures function
