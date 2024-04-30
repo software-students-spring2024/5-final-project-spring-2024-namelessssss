@@ -1,21 +1,23 @@
 name: weather-checking-app
 services:
   - name: web
-    image:
-      registry_type: DOCR
-      registry: registry.digitalocean.com/cs-474-project-5
-      repository: web-app
-      tag: latest
+    github:
+      branch: main
+      repo_clone_url: https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss.git
+      deploy_on_push: true
+    dockerfile_path: web-app/Dockerfile
+    source_dir: web-app
     instance_count: 1
     instance_size_slug: basic-xxs
     routes:
       - path: /
 
-  - name: weather-data-collect
-    image:
-      registry_type: DOCR
-      registry: registry.digitalocean.com/cs-474-project-5
-      repository: weather-data-collect
-      tag: latest
+  - name: weather-data
+    github:
+      branch: main
+      repo_clone_url: https://github.com/software-students-spring2024/5-final-project-spring-2024-namelessssss.git
+      deploy_on_push: true
+    dockerfile_path: weather-data-collect/Dockerfile
+    source_dir: weather-data-collect
     instance_count: 1
     instance_size_slug: basic-xxs
