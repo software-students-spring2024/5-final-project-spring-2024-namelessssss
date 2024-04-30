@@ -51,8 +51,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: DigitalOcean App Platform Deployment
-        uses: digitalocean/app_action@v1.1.6
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
         with:
-          app_name: webApp
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Build and Push Web App Image
+        run: |
+          cd web-app
+          docker build -t registry.digitalocean.com/cs-474-project-5/web-app:latest .
+          docker push registry.digitalocean.com/cs-474-project-5/web-app:latest
+
+      - name: Deploy to App Platform
+        run: doctl apps create --spec .do/app.yaml
