@@ -1,23 +1,19 @@
 name: 5-final-project-spring-2024-namelessssss
 services:
   - name: web-app
-    github:
-      repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
-      branch: main
-      deploy_on_push: true
-    dockerfile_path: web-app/Dockerfile
-    source_dir: web-app
+    image:
+      registry_type: DOCKER_HUB
+      repository: jiahualiao/web-app
+      tag: latest
     instance_count: 1
     instance_size_slug: basic-xxs
     routes:
       - path: /
 
   - name: weather-data-collect
-    github:
-      repo: software-students-spring2024/5-final-project-spring-2024-namelessssss
-      branch: main
-      deploy_on_push: true
-    dockerfile_path: weather-data-collect/Dockerfile
-    source_dir: weather-data-collect
+    image:
+      registry_type: DOCKER_HUB
+      repository: jiahualiao/weather-data-collect
+      tag: latest
     instance_count: 1
     instance_size_slug: basic-xxs
