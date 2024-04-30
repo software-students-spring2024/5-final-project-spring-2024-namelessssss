@@ -39,7 +39,11 @@
     {% else %}
         <p>Wind Speed: N/A</p>
     {% endif %}
-    <p>Conditions: {{ weather_data.weather[0].description }}</p>
+    {% if 'weather' in weather_data and weather_data.weather %}
+        <p>Conditions: {{ weather_data.weather[0].description }}</p>
+    {% else %}
+        <p>Conditions: N/A</p>
+    {% endif %}
     {% elif error %}
     <p>{{ error }}</p>
     {% endif %}
