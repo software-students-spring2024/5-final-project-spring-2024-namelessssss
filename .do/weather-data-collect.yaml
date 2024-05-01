@@ -1,13 +1,13 @@
 name: 5-final-project-spring-2024-namelessssss
 region: nyc
 services:
-  - name: web-app
+  - name: weather-data-collect
     image:
       registry_type: DOCKER_HUB
-      repository: kalados/web-app
+      repository: kalados/weather-data-collect
       tag: latest
     environment_slug: python
-    http_port: 5050
+    http_port: 5030
     instance_count: 1
     instance_size_slug: basic-s
     routes:
