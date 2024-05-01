@@ -55,4 +55,4 @@ jobs:
         run: |
           sudo snap install doctl
           doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          doctl apps list
+          doctl apps update aced4801-b44c-42ac-a993-b2fc1790e609 --spec .do/app.yaml
