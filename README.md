@@ -41,6 +41,8 @@ The Nameless Weather App is made up of **two major subsystems**:
 4. The application will display the real-time weather data for the selected city, including it's current temperature, humidity level, wind speed, and overall weather condition.
 5. To get information about another city or update the information you already have to represent the current time, repeat steps 2-3 as needed.
 
+> **You can also access the Digital Ocean version here: https://king-prawn-app-kaj2g.ondigitalocean.app/namelessWeatherApp**
+
 ## Contributors
 
 - [Hannah Horiuchi](https://github.com/hah8236)
