@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 20px;
 }
 
@@ -17,9 +17,10 @@ label {
 
 select {
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
-input[type="submit"] {
+button {
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
