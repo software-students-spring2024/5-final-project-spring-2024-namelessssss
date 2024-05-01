@@ -1,4 +1,4 @@
-name: 5-final-project-spring-2024-namelessssss
+name: weatherCollect
 region: nyc
 services:
   - name: weather-data-collect

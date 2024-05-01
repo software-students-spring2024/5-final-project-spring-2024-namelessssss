@@ -1,4 +1,4 @@
-name: 5-final-project-spring-2024-namelessssss
+name: webApp
 region: nyc
 services:
   - name: web-app
@@ -14,11 +14,6 @@ services:
       - path: /
 
 envs:
-  - key: OPENWEATHERMAP_API_KEY
-    scope: RUN_AND_BUILD_TIME
-    type: GENERAL
-    value: 446bc2398e97a219b106cd4efd844074
-
   - key: MONGODB_URI
     scope: RUN_AND_BUILD_TIME
     type: GENERAL

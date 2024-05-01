@@ -57,4 +57,5 @@ jobs:
         run: |
           sudo snap install doctl
           doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          doctl apps list --format ID,Created
           doctl apps update 732db8dc-5866-4235-8935-679232b31cb2 --spec weather-data-collect/weather-data-collect.yaml
