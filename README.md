@@ -11,10 +11,10 @@ The app then displays real-time information about the weather in that city, incl
 The Nameless Weather App is made up of **two major subsystems**:
 
 1. **Weather Data Collection Subsystem:** This subsystem is responsible for collecting real-time weather data from OpenWeatherMap's API. It fetches data such as temperature, humidity, wind speed, and weather condition. Then the data is stored in the MongoDB database.
-> **insert link to container image for this custom subsystem hosted on dockerhub**
+> **https://hub.docker.com/r/kalados/weather-data-collect**
 
 2. **Web Application Subsystem:** This subsystem is a web application that displays the real-time weather data fetched by the first subsystem. Users can select their location to receive the current weather information.
-> **insert link to container image for this custom subsystem hosted on dockerhub**
+> **https://hub.docker.com/r/kalados/web-app**
 
 ## Instructions
 
@@ -35,7 +35,7 @@ The Nameless Weather App is made up of **two major subsystems**:
 
 #### Accessing the Web Application
 
-1. Open a web browser and visit *what is the local host again lol* to access the Nameless Weather App web application.
+1. Open a web browser and visit `localhost:5050` to access the Nameless Weather App web application.
 2. From the first dropdown, select which major city you would like to retrieve weather data from. Then from the second, select which unit of temperature you would like to recieve the data in.
 3. Click the Check Weather button to submit your request.
 4. The application will display the real-time weather data for the selected city, including it's current temperature, humidity level, wind speed, and overall weather condition.
@@ -47,9 +47,3 @@ The Nameless Weather App is made up of **two major subsystems**:
 - [Jiahua Liao](https://github.com/Jiahuita)
 - [Kevin Lin](https://github.com/Kalados)
 - [Nicole Luzuriaga](https://github.com/nicjluz)
-
-
-
-delete below:
-
-An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.

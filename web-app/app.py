@@ -32,4 +32,4 @@ def index():
         return render_template('index.html', cities=cities, temp_units=temp_units, selected_unit=selected_unit, selected_city=selected_city)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050, debug=True)
+    app.run(host='0.0.0.0', port=5050)

@@ -1,0 +1,40 @@
+name: 5-final-project-spring-2024-namelessssss
+region: nyc
+services:
+  - name: weather-data-collect
+    image:
+      registry_type: DOCKER_HUB
+      repository: kalados/weather-data-collect
+      tag: latest
+    environment_slug: python
+    http_port: 5030
+    instance_count: 1
+    instance_size_slug: basic-s
+    routes:
+      - path: /
+
+envs:
+  - key: OPENWEATHERMAP_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: GENERAL
+    value: 446bc2398e97a219b106cd4efd844074
+
+  - key: MONGODB_URI
+    scope: RUN_AND_BUILD_TIME
+    type: GENERAL
+    value: mongodb+srv://nameless.wun5lpq.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority&appName=Nameless
+
+  - key: DB_NAME
+    scope: RUN_AND_BUILD_TIME
+    type: GENERAL
+    value: Project5
+
+  - key: DB_COLLECTION_NAME
+    scope: RUN_AND_BUILD_TIME
+    type: GENERAL
+    value: WeatherData
+
+  - key: SSL_CERT_FILE
+    scope: RUN_AND_BUILD_TIME
+    type: GENERAL
+    value: X509-cert-4588623656805667932.pem

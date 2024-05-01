@@ -4,12 +4,11 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -23,22 +22,39 @@ jobs:
   push-to-docker-hub:
     needs: build-and-test
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Check if secrets are empty
+        run: |
+          if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
+            echo "One of the secrets is empty!"
+          else
+            echo "Secrets are not empty."
+          fi
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Push Weather Data Collection to Docker Hub
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push weatherDataCollect:latest
+          cd weather-data-collect
+          docker build -t weather-data-collect .
+          docker tag weather-data-collect ${{ secrets.DOCKER_USERNAME }}/weather-data-collect:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/weather-data-collect:latest
 
   deploy:
     needs: push-to-docker-hub
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-      - name: Deploy to Digital Ocean
+      - name: Deploy to DigitalOcean
+        env:
+          DIGITALOCEAN_CLI_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         run: |
-          # Add deployment steps for Digital Ocean
+          sudo snap install doctl
+          doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          doctl apps update 9f3fbac5-a54f-4504-b6b8-10b41d323bbf --spec .do/weather-data-collect.yaml
