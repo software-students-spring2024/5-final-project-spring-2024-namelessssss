@@ -56,4 +56,4 @@ jobs:
           sudo snap install doctl
           doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           doctl apps list --format ID,Created
-          doctl apps update 4cc7d717-3d4a-49e3-ab40-581b02fe6061 --spec web-app/app.yaml
+          #doctl apps update 4cc7d717-3d4a-49e3-ab40-581b02fe6061 --spec web-app/app.yaml
