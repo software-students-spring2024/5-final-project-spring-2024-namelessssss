@@ -1,6 +1,10 @@
 import unittest
 from unittest.mock import patch
 from weatherDataCollect import app, fetch_weather_data, convert_temperatures, store_weather_data
+# to test coverage, run these:
+# cd weather-data-collect
+# docker build -t weather-data-collect .
+# docker run --rm weather-data-collect sh -c "coverage run -m unittest discover tests && coverage report"
 
 class TestWeatherDataCollect(unittest.TestCase):
     def setUp(self):
