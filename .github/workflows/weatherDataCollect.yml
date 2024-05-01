@@ -51,19 +51,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry
-        run: doctl registry login --expiry-seconds 600
-
-      - name: Build and Push Web App Image
+      - name: Deploy to DigitalOcean
         run: |
-          cd weather-data-collect
-          docker build -t registry.digitalocean.com/cs-474-project-5/weather-data-collect:latest .
-          docker push registry.digitalocean.com/cs-474-project-5/weather-data-collect:latest
-
-      - name: Deploy to App Platform
-        run: doctl apps create --spec .do/app.yaml
+          sudo snap install doctl
+          doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          echo "doctl apps list"
